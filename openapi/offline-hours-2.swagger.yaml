@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Test 1
+  description: Test 1
+# paths: {}
+# Added by API Auto Mocking Plugin
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/conradkoh-fp/OfflineHours/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/conradkoh-fp/Test/1.0.0
+paths:
+  /offline-hours:
+    get:
+      summary: Returns a list of offline hours.
+      description: Gets the actual vs compared offline hours.
+      responses:
+        '200':    # status code
+          description: A map, where keys are vendor ids, and values are maps with actual and comparison data
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    VendorId:
+                      type: string
+                      example: "s4tq_FP_SG"
+                    Actual:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Date:
+                            type: string
+                            example: "2020-08-10"
+                          GrossOrders:
+                            type: number
+                            example: 1
+                          OfflineHours:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                DurationHours:
+                                  type: number
+                                  example: 11.6167
+                                Reason:
+                                  type: string
+                                  example: "Order Declined"
+                                ReasonID:
+                                  type: string
+                                  example: "sum_closed_hours_order_declined"
+                          OpenHours:
+                            type: number
+                            example: 12
+                          VendorId:
+                            type: number
+                            example: 5599
+                    Comparison:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Date:
+                            type: string
+                            example: "2020-07-31"
+                          GrossOrders:
+                            type: number
+                            example: 1
+                          OfflineHours:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                DurationHours:
+                                  type: number
+                                  example: 11.6167
+                                Reason:
+                                  type: string
+                                  example: "Order Declined"
+                                ReasonID:
+                                  type: string
+                                  example: "sum_closed_hours_order_declined"
+                          OpenHours:
+                            type: number
+                            example: 12
+                          VendorId:
+                            type: number
+                            example: 5599
