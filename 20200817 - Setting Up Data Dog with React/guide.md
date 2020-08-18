@@ -29,8 +29,8 @@ datadogRum.init({
   service: "Vendor Portal", //Update this to the correct service name
   datacenter: Datacenter.EU, //Update this to the relevant datacenter
   sampleRate: 100,
-  trackInteractions: true,
-  silentMultipleInit: true,
+  trackInteractions: true, //Automatically track user interactions. Refer to official documentation for more info
+  silentMultipleInit: true, //Fail silently in the event that rum is initialized multiple times
 });
 ```
 
