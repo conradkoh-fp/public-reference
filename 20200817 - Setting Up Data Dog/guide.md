@@ -3,7 +3,7 @@
 ## Data Dog Initialization
 Create a new client token and get the application id from Data Dog. This step should yield the `REACT_DATADOG_APP_ID` and `REACT_DATADOG_APP_CLIENT_TOKEN` variables
 
-## React configuration
+## React configuration (Data Dog Browser Rum @ v1.12.7)
 
 1. Install the required dependencies in your React project
 
@@ -32,8 +32,7 @@ datadogRum.init({
   trackInteractions: true,
   silentMultipleInit: true,
 });
-datadogRum.addRumGlobalContext(
-  "application_id",
-  `${process.env.REACT_DATADOG_APP_ID}`
-);
 ```
+
+### Others
+For more information on datadog rum and the available flags, refer to their [official documentation](https://docs.datadoghq.com/real_user_monitoring/browser/?tab=us)
