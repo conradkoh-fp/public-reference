@@ -1,7 +1,7 @@
 # Setting up data dog monitoring
 
 ## Data Dog Initialization
-Create a new client token and get the application id from Data Dog. This step should yield the `REACT_DATADOG_APP_ID` and `REACT_DATADOG_APP_CLIENT_TOKEN`
+Create a new client token and get the application id from Data Dog. This step should yield the `REACT_DATADOG_APP_ID` and `REACT_DATADOG_APP_CLIENT_TOKEN` variables
 
 ## React configuration
 
