@@ -26,7 +26,7 @@ datadogRum.init({
   applicationId: `${process.env.REACT_DATADOG_APP_ID}`,
   clientToken: `${process.env.REACT_DATADOG_APP_CLIENT_TOKEN}`,
   env: `${process.env.NODE_ENV}`,
-  service: "Vendor OPS KPI", //Update this to the correct service name
+  service: "Vendor Portal", //Update this to the correct service name
   datacenter: Datacenter.EU, //Update this to the relevant datacenter
   sampleRate: 100,
   trackInteractions: true,
