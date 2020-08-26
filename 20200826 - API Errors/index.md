@@ -11,4 +11,9 @@ Guidelines here have been adapted from [Microsoft API Guidelines](https://github
 3. To display more customised error messages where they have occurred, traverse the following and pick the deepest message available
     1. innerError to get more detailed error message to be displayed to a user on a page level
     2. details -> innererror to get per field error messages first, and then traverse inner error of details to get custom errors
-4. messasges should be keys to be used for localisation
+4. Localization keys will be derived from either error code or inner error code where inner error code should take precedence. This will be done by the front-end.
+
+### To Do
+1. Confirm finalised set of universal error codes - Jeffrey
+2. Come up with deals API specific inner error codes - Jeffrey
+3. Figure out what exactly is the convention for mapping the error codes to localised keys - Conrad
