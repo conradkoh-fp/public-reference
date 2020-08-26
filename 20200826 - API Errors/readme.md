@@ -19,5 +19,6 @@ Guidelines here have been adapted from [Microsoft API Guidelines](https://github
 3. Figure out what exactly is the convention for mapping the error codes to localised keys - Conrad
 
 ### Others
-Discussed examples can be found [here](https://github.com/conradkoh-fp/public-reference/blob/master/20200826%20-%20API%20Errors/examples.ts);
+Discussed examples can be found [here](https://github.com/conradkoh-fp/public-reference/blob/master/20200826%20-%20API%20Errors/examples.ts)
+
 Interfaces for types can be found [here](https://github.com/conradkoh-fp/public-reference/blob/master/20200826%20-%20API%20Errors/types.ts)
