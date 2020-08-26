@@ -1,9 +1,9 @@
 //Frontend code
-export interface APIError {
+export interface ServerError {
 	code: ErrorCode //language indepdendent code, human readable, addition to this considered a breaking change
 	message: string
 	target?: string //the "target" of the error (?) - seems to specify WHERE the error has occurred (such as a property)
-	details?: APIError[]
+	details?: ServerError[]
 	innererror?: InnerError
 }
 
