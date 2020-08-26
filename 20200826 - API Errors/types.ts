@@ -16,8 +16,8 @@ export interface InnerError {
 
 //Global server error code that must be handled by ALL clients
 export enum ErrorCode {
-	TokenExpired = 'token_expired',
-	InvalidToken = 'invalid_token',
+    TokenExpired = 'token_expired',
+    InvalidToken = 'invalid_token',
     BadArgument = 'bad_argument',
     NullValue = 'null_value',
     MalformedValue = 'malformed_value',
