@@ -17,6 +17,8 @@ Guidelines here have been adapted from [Microsoft API Guidelines](https://github
 1. Confirm finalised set of universal error codes - Jeffrey
 2. Come up with deals API specific inner error codes - Jeffrey
 3. Figure out what exactly is the convention for mapping the error codes to localised keys - Conrad
+4. Figure out conventions on how we can express target - Conrad
+    1. See if there is a use case for contextual field names.
 
 ### Others
 Discussed examples can be found [here](https://github.com/conradkoh-fp/public-reference/blob/master/20200826%20-%20API%20Errors/examples.ts)
