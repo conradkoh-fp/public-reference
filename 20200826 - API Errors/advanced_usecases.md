@@ -42,6 +42,7 @@ export interface InnerError {
 
 
 ## Representation 2
+Payload:
 ``` json
 {
     "error": "bad_argument",
