@@ -9,8 +9,6 @@ export interface ServerError {
 
 export interface InnerError {
     code?: string,
-    message?: string, 
-    target?: string,
     innererror?: InnerError
 }
 
