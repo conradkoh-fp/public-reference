@@ -20,7 +20,7 @@ Example Config:
 
 ```json
 {
-  "vendor_performane": "Vendor Performance",
+  "vendor_performance": "Vendor Performance",
   "vendor_performance[FP_SG]": "Vendor Performance Singapore",
   "vendor_performance_survey": "Click here to go to {link}"
 }
