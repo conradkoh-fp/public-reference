@@ -119,4 +119,4 @@ translate("vendor_performance_survey2", null, "FP_MY") => "Click here to go to h
 1. If we don't throw an exception, how will we detect any errors that might have occurred in our configuration?
 
 ### Other Challenges
-1. Rendering text that has 'Read More' with markdown is a challenge. Not all characters in markdown are visible characters, so likely the character limit for 'Read More' will not be applied correctly.
+1. Current specification around 'Read More' text being based on characters and trimming is no longer possible. Propose to do by single line instead.
