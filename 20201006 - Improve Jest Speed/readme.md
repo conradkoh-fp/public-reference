@@ -2,7 +2,7 @@ Running tests with different number of workers to determine the best configurati
 ```
 const { exec } = require('child_process');
 async function main() {
-  const scenarios = [2, 4, 6, 8];
+  const scenarios = [2, 3, 4, 5, 6, 8];
   const iterCount = 10;
   let runStats = [];
   for (let i = 1; i <= iterCount; i++) {
@@ -23,6 +23,11 @@ async function main() {
  * @param {number} numWorkers
  */
 async function runTest(numWorkers) {
+  await new Promise((resolve, reject) => {
+    exec(`yarn jest --clearCache`, (err) => {
+      err ? reject(err) : resolve();
+    });
+  });
   /** @type {string} */
   let testOutput = await new Promise((resolve, reject) => {
     exec(`yarn jest --maxWorkers=${numWorkers}`, (err, stdOut, stdErr) => {
