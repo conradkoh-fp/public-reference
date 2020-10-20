@@ -102,11 +102,9 @@ class DealService {
     return this._name;
   }
   async getDeals() {
-    console.log('getting deals...');
     return [{ dealType: 'free-delivery' }];
   }
   async createDeals() {
-    console.log('creating deals...');
   }
 }
 
