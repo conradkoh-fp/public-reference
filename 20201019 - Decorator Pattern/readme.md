@@ -27,15 +27,16 @@ class DealService {
         let result = [{ dealType: 'free-delivery' }];
         this._log('getDeals completed: ', endTime);
         this._log('getDeals time taken: ', (endTime - startTime) / 1000, 'seconds');
+        return result;
     }
     async createDeal(deal: any) {
         await fetch('/deals', deal);
     }
 }
 ```
-The are a couple of problems with this solution. Firstly, to enable logging we will need to modify all places that are constructing `DealService` to include a logger. This is less than ideal if there are a large number of places that this is being created.
+There are a couple of problems with this solution. Firstly, to enable logging we will need to modify all places that are constructing `DealService` to include a logger. This is less than ideal if there are a large number of places that this is being created.
 
-Also, in applying SOLID priciples, this violates
+Also, in applying SOLID principles, this violates
 1. Single Responsibility Principle - DealService is not also responsible for logging
 2. Open closed principle - Deal Service has been modified
 
@@ -84,12 +85,12 @@ main()
 ```
 
 ## Decorator pattern vs Inheritance
-WHen attempting to add behavior without modifying an existing class, the first thought that comes to mind can be to use inheritance. The key difference here is that decorators add behavior to instances of objects, while inheritance modifies the prototype or the class itself.
+When attempting to add behavior without modifying an existing class, the first thought that comes to mind can be to use inheritance. The key difference here is that decorators add behavior to instances of objects, while inheritance modifies the prototype or the class itself.
 
-In a language such as Javascript, it is easy to access and modify classes during runtime as well, which allows some neat tricks to add behavior and functionality. Since the class prototype is accessible, we are able to write a function to create a class that adds functionality to all methods of a class.
+In a language such as Javascript, it is easy to access and modify classes during runtime as well, which allows some neat tricks to add behavior and functionality. Since the class prototype is accessible, we can write a function to create a class that adds functionality to all methods of a class.
 
 # Bonus
-Goal: Implement a higher order function that takes in a class, and returns another class that has the same behavior, but with logging attached to all methods of the class.
+Goal: Implement a higher-order function that takes in a class, and returns another class that has the same behavior, but with logging attached to all methods of the class.
 
 Since in Javascript, classes are objects (progrmaming objects), metaprogramming + decorator pattern = 🤯
 ```typescript
@@ -156,7 +157,7 @@ function main() {
 main()
 ```
 
-The main benefit of doing something like this, is that you can decorate the export of a file if you need to enable some level of logging, without having to modify the code everywhere. However, it is important to note that we are bending the definitions of the decorator pattern here, 
+The main benefit of doing something like this is that you can decorate the export of a file if you need to enable some level of logging, without having to modify the code everywhere. However, it is important to note that we are bending the definitions of the decorator pattern here, 
 
 In this example, we have deviated slightly from what the idea of the decorator pattern is. If we view classes as objects, as they rightfully are in this example, then no one can quite fault us yet.
 
