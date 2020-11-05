@@ -1,14 +1,17 @@
-import { FakeRecurringBehavior, RecurMode } from "./types";
+import { FakeRecurringBehavior, EndDateType } from "./types";
 
-export const PandaProReucrringBehavior = (recurMode: RecurMode): FakeRecurringBehavior =>  (deal)  => {
-  switch(recurMode) {
-    case RecurMode.Perpetual: {
+export const PandaProReucrringBehavior = (endDateType: EndDateType): FakeRecurringBehavior =>  (deal)  => {
+  switch(endDateType) {
+    case EndDateType.Recurring: {
       return {
-        endDate: deal.startDate + "1 years",
+        endDate: {
+          type: EndDateType.Recurring,
+          value: deal.endDate + '5 years'
+        }
       };
     }
     default: {
-      throw new Error(`Invalid recur mode '${recurMode}'`)
+      throw new Error(`Invalid end date type '${endDateType}'`)
     }
   }
 };

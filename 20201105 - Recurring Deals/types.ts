@@ -1,16 +1,24 @@
 export interface DealRequest {
   class: DealClass;
-  dealType: "fixed" | "percentaage" | "free-delivery";
+  dealType: "fixed" | "percentage" | "free-delivery";
   discountValue: number;
   mov: number;
   startDate: string;
-  endDate?: string;
+  endDate: {
+    value?: string,
+    type: EndDateType
+  };
   vendors: string[];
-  recurMode?: RecurMode;
 }
 
+export enum EndDateType {
+  Recurring = 'recurring',
+  Fixed = 'fixed'
+}
+
+
 export interface OffersAPIDeal {
-  dealType: "fixed" | "percentaage" | "free-delivery";
+  dealType: "fixed" | "percentage" | "free-delivery";
   discountValue: number;
   mov: number;
   startDate: string;
@@ -18,13 +26,12 @@ export interface OffersAPIDeal {
   isPandaPro: boolean;
 }
 
-export enum RecurMode {
-  Perpetual = "perpetual",
-}
-
 export enum DealClass {
   VFD = "vfd",
   PandaPro = "pandapro",
 }
 
-export type FakeRecurringBehavior = (deal: DealRequest) => { endDate: string };
+export type FakeRecurringBehavior = (deal: DealRequest) => { endDate: {
+  value: string,
+  type: EndDateType
+} };

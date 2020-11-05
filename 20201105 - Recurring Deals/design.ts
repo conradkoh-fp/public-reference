@@ -2,7 +2,7 @@ import { PandaProReucrringBehavior } from "./PandaProRecurringBehavior";
 import {
   DealRequest,
   DealClass,
-  RecurMode,
+  EndDateType,
   OffersAPIDeal,
   FakeRecurringBehavior,
 } from "./types";
@@ -17,7 +17,7 @@ function handleDealRequest(dealRequest: DealRequest) {
     //Determine what the recurring behavior should be given the class and the recur mode
     const recurBehavior = getDealRecurBehavior(
       dealRequest.class,
-      dealRequest.recurMode
+      dealRequest.endDate.type
     );
     //Apply the recurring behavior and create a new payload
     const recurringDeal = withDealRecurrence(dealRequest, recurBehavior);
@@ -34,14 +34,14 @@ function handleDealRequest(dealRequest: DealRequest) {
  */
 const getDealRecurBehavior = (
   dealClass: DealClass,
-  recurMode: RecurMode
+  endDateType: EndDateType
 ): FakeRecurringBehavior => {
   switch (dealClass) {
     case DealClass.PandaPro: {
-      return PandaProReucrringBehavior(recurMode);
+      return PandaProReucrringBehavior(endDateType);
     }
     case DealClass.VFD: {
-      return VFDRecurringBehavior(recurMode);
+      return VFDRecurringBehavior(endDateType);
     }
     default: {
       throw new Error(
@@ -62,18 +62,18 @@ function withDealRecurrence(
 }
 
 function isRecurringDeal(deal: DealRequest): boolean {
-  return deal.recurMode != null;
+  return deal.endDate.type === EndDateType.Recurring;
 }
 
 
 function createOffersAPIDeal(deal: DealRequest) {
-  if (deal.endDate) {
+  if (deal.endDate && deal.endDate.value) {
     const offersAPIDeal: OffersAPIDeal = {
       dealType: deal.dealType,
       discountValue: deal.discountValue,
       mov: deal.mov,
       startDate: deal.startDate,
-      endDate: deal.endDate,
+      endDate: deal.endDate.value,
       isPandaPro: deal.class === DealClass.PandaPro,
     };
     //Create deal

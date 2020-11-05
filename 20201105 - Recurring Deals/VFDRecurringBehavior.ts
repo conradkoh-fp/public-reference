@@ -1,14 +1,17 @@
-import { RecurMode, FakeRecurringBehavior } from "./types";
+import { FakeRecurringBehavior, EndDateType } from "./types";
 
-export const VFDRecurringBehavior = (recurMode: RecurMode): FakeRecurringBehavior =>  (deal) => {
-  switch(recurMode) {
-    case RecurMode.Perpetual: {
+export const VFDRecurringBehavior = (endDateType: EndDateType): FakeRecurringBehavior =>  (deal) => {
+  switch(endDateType) {
+    case EndDateType.Recurring: {
       return {
-        endDate: deal.startDate + "5 years",
+        endDate: {
+          type: EndDateType.Recurring,
+          value: deal.endDate + '1 year'
+        }
       };
     }
     default: {
-      throw new Error(`Invalid recur mode '${recurMode}'`)
+      throw new Error(`Invalid end date type '${endDateType}'`)
     }
   }
 };
