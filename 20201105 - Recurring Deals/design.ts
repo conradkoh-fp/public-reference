@@ -20,7 +20,7 @@ function handleDealRequest(dealRequest: DealRequest) {
       dealRequest.recurMode
     );
     //Apply the recurring behavior and create a new payload
-    const recurringDeal = withRecurrence(dealRequest, recurBehavior);
+    const recurringDeal = withDealRecurrence(dealRequest, recurBehavior);
     createOffersAPIDeal(recurringDeal);
   } else {
     createOffersAPIDeal(dealRequest);
@@ -51,7 +51,7 @@ const getDealRecurBehavior = (
   }
 };
 
-function withRecurrence(
+function withDealRecurrence(
   deal: DealRequest,
   recurBehavior: FakeRecurringBehavior
 ): DealRequest {
