@@ -1,79 +1,65 @@
-import { PandaProReucrringBehavior } from "./PandaProRecurringBehavior";
+import { EndDateOffsetStrategy } from "./EndDateOffsetStrategy";
+import { PandaProEndDateStrategy } from "./PandaProEndDateStrategy";
 import {
   DealRequest,
   DealClass,
   EndDateType,
   OffersAPIDeal,
-  FakeRecurringBehavior,
+  EndDateStrategy,
 } from "./types";
-import { VFDRecurringBehavior } from "./VFDRecurringBehavior";
+import { VFDEndDateStrategy } from "./VFDEndDateStrategy";
 
 /**
  * Handle API request for recurring deals
- * @param dealRequest 
+ * @param dealRequest
  */
 function handleDealRequest(dealRequest: DealRequest) {
-  if (isRecurringDeal(dealRequest)) {
-    //Determine what the recurring behavior should be given the class and the recur mode
-    const recurBehavior = getDealRecurBehavior(
-      dealRequest.class,
-      dealRequest.endDate.type
-    );
-    //Apply the recurring behavior and create a new payload
-    const recurringDeal = withDealRecurrence(dealRequest, recurBehavior);
-    createOffersAPIDeal(recurringDeal);
-  } else {
-    createOffersAPIDeal(dealRequest);
-  }
+  //Determine what the recurring behavior should be given the class and the recur mode
+  const endDateStrategy = getDealEndDateStrategy(dealRequest);
+  //Apply the recurring behavior and create a new payload
+  const recurringDeal = applyEndDateStrategy(dealRequest, endDateStrategy);
+  createOffersAPIDeal(recurringDeal);
 }
 
 /**
  * Get the assigned behavior for a recurring deal
- * @param dealClass 
- * @param recurMode 
+ * @param dealClass
+ * @param recurMode
  */
-const getDealRecurBehavior = (
-  dealClass: DealClass,
-  endDateType: EndDateType
-): FakeRecurringBehavior => {
-  switch (dealClass) {
+const getDealEndDateStrategy = (dealRequest: DealRequest): EndDateStrategy => {
+  switch (dealRequest.class) {
     case DealClass.PandaPro: {
-      return PandaProReucrringBehavior(endDateType);
+      return EndDateOffsetStrategy("5 years");
     }
     case DealClass.VFD: {
-      return VFDRecurringBehavior(endDateType);
+      return EndDateOffsetStrategy("1 year");
     }
     default: {
       throw new Error(
-        `Recurring behaviour for class ${dealClass} not implemented`
+        `Recurring behaviour for class ${dealRequest.class} not implemented`
       );
     }
   }
 };
 
-function withDealRecurrence(
+function applyEndDateStrategy(
   deal: DealRequest,
-  recurBehavior: FakeRecurringBehavior
+  endDateStrategy: EndDateStrategy
 ): DealRequest {
   return {
     ...deal,
-    ...recurBehavior(deal),
+    ...endDateStrategy(deal),
   };
 }
 
-function isRecurringDeal(deal: DealRequest): boolean {
-  return deal.endDate.type === EndDateType.Recurring;
-}
-
-
 function createOffersAPIDeal(deal: DealRequest) {
-  if (deal.endDate && deal.endDate.value) {
+  if (deal.endDate) {
     const offersAPIDeal: OffersAPIDeal = {
       dealType: deal.dealType,
       discountValue: deal.discountValue,
       mov: deal.mov,
       startDate: deal.startDate,
-      endDate: deal.endDate.value,
+      endDate: deal.endDate,
       isPandaPro: deal.class === DealClass.PandaPro,
     };
     //Create deal

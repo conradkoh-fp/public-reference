@@ -4,16 +4,13 @@ export interface DealRequest {
   discountValue: number;
   mov: number;
   startDate: string;
-  endDate: {
-    value?: string,
-    type: EndDateType
-  };
+  endDateType: EndDateType;
+  endDate: string;
   vendors: string[];
 }
 
 export enum EndDateType {
-  Recurring = 'recurring',
-  Fixed = 'fixed'
+  Recurring = 'recurring'
 }
 
 
@@ -31,7 +28,4 @@ export enum DealClass {
   PandaPro = "pandapro",
 }
 
-export type FakeRecurringBehavior = (deal: DealRequest) => { endDate: {
-  value: string,
-  type: EndDateType
-} };
+export type EndDateStrategy = (deal: DealRequest) => { endDate: string };
